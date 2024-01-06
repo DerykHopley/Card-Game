@@ -1,0 +1,90 @@
+[
+  {
+    "Id": "Footman123",
+    "Name": "Footman",
+    "Type": "Units",
+    "Power": 1,
+    "Cost": 1,
+    "Effect": "+1 Power for each other Footman"
+  },
+  {
+    "Id": "Archer123",
+    "Type": "Units",
+    "Power": 1,
+    "Cost": 1,
+    "Name": "Archer",
+    "Effect": "+1 Power for each other Archers"
+  },
+  {
+    "Id": "SquadLeader123",
+    "Type": "Units",
+    "Power": 2,
+    "Cost": 2,
+    "Name": "SquadLeader",
+    "Effect": "Give all friendly\n+1 Power"
+  },
+  {
+    "Id": "Warrior123",
+    "Type": "Units",
+    "Power": 3,
+    "Cost": 2,
+    "Name": "Warrior",
+    "Effect": "-1 to a random backline enemy unit"
+  },
+  {
+    "Id": "Guardian123",
+    "Type": "Units",
+    "Power": 1,
+    "Cost": 2,
+    "Name": "Guardian",
+    "Effect": "Reduces all negative enemy Powers by 1 here"
+  },
+  {
+    "Id": "Knight123",
+    "Type": "Units",
+    "Power": 2,
+    "Cost": 3,
+    "Name": "Knight",
+    "Effect": "Reduces adjacent negative enemy Powers by 1 here"
+  },
+  {
+    "Id": "Mercenary123",
+    "Type": "Units",
+    "Power": 4,
+    "Cost": 3,
+    "Name": "Mercenary",
+    "Effect": "Melee,\nAlways Retaliates\nReturn to Supply when damaged\nor at start of next turn\nAfter played, increase\ncost by 1"
+  },
+  {
+    "Id": "Spearman123",
+    "Type": "Units",
+    "Power": 1,
+    "Cost": 1,
+    "Name": "Spearman",
+    "Effect": "Melee or Ranged"
+  },
+  {
+    "Id": "Mentor123",
+      "Type": "Units",
+      "Power": 3,
+      "Cost": 3,
+      "Name": "Mentor",
+      "Effect": "Melee,\nWhen played give\nfriendly unit +2 Power"
+  },
+  {
+    "Id": "Mage123",
+      "Type": "Units",
+      "Power": 3,
+      "Cost": 4,
+      "Name": "Mage",
+      "Effect": "Ranged,\nWhen played give\nfriendly unit +2 Power"
+  },
+  {
+      "Id":"Cavelry123",
+      "Type": "Units",
+      "Power": 3,
+      "Cost": 4,
+      "Name": "Cavelry",
+      "Effect": "If unit starts in the rear and moves into the front gain +2 Power"
+  }
+]

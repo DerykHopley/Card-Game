@@ -1,0 +1,20 @@
+[
+  {
+    "Fog": {
+      "Name":  "Fog of War",
+      "Effect": "-1 Attack for all Ranged"
+    }
+  },
+  {
+    "Trebuche": {
+      "Name": "Enemy Trebuches",
+      "Effect": "+1 Cost to play cards here"
+    }
+  },
+  {
+    "ClearSky": {
+      "Name": "Clear Skies",
+      "Effect": "+1 Attack"
+    }
+  }
+]

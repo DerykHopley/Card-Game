@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Tabletop Card Game - Colyseus": {
+      "commandName": "Project",
+      "commandLineArgs": "--path.--verbose",
+      "remoteDebugEnabled": false
+    },
+    "Profile 1": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
