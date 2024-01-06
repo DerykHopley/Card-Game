@@ -51,7 +51,7 @@ func _on_game_message(data):
 		print ("Card Count: " + str(data))
 		#emit_signal("render_cards", data.count)
 	elif (data.type == "card_dropped"):
-		emit_signal("dropped_card", data.area, data.card)
+		emit_signal("dropped_card", data.zone, data.subzone, data.card)
 	elif (data.type == "card_addeded"):
 		emit_signal("render_cards", data.count)
 
@@ -79,8 +79,13 @@ func _on_cards_drawn(i):
 	room.send("game-message", cards_drawn)
 
 #send message to server that card has been dropped
-func _on_card_dropped(area, card):
-	var card_dropped = {"type": "card_dropped","area": area, "card": card}
+func _on_card_dropped(zone, subzone, card):
+	var card_dropped = {
+		"type": "card_dropped",
+		"zone": zone, 
+		"subzone": subzone, 
+		"card": card
+	}
 	room.send("game-message", card_dropped)
 
 #send message to server that card has been dropped
