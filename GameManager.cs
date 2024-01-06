@@ -98,6 +98,7 @@ public class GameManager : Node
 	private void GameStart()
 	{
 		//TODO: Set Random Field
+		//TODO: Make method
 		//TODO: Make Scene
 		((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandTopLeft")).RegionRect = FieldZones.Arctic.Region;
 		((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandTopRight")).RegionRect = FieldZones.Arctic.Region;
@@ -105,14 +106,17 @@ public class GameManager : Node
 		((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandBottomLeft")).RegionRect = FieldZones.Arctic.Region;
 		((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandBottomRight")).RegionRect = FieldZones.Arctic.Region;
 		
-		for (int i = 1; i < 6; i++)
-		{
-			((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/Land"+i)).RegionRect = FieldZones.Grass.Region;
-		}
-		for (int i = 1; i < 6; i++)
-		{
-			((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/Land"+i)).RegionRect = FieldZones.Lava.Region;
-		}
+		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandTopLeft")).RegionRect = FieldZones.Grass.Region;
+		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandTopRight")).RegionRect = FieldZones.Grass.Region;
+		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandMid")).RegionRect = FieldZones.Grass.Region;
+		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandBottomLeft")).RegionRect = FieldZones.Grass.Region;
+		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandBottomRight")).RegionRect = FieldZones.Grass.Region;
+		
+		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandTopLeft")).RegionRect = FieldZones.Lava.Region;
+		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandTopRight")).RegionRect = FieldZones.Lava.Region;
+		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandMid")).RegionRect = FieldZones.Lava.Region;
+		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandBottomLeft")).RegionRect = FieldZones.Lava.Region;
+		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandBottomRight")).RegionRect = FieldZones.Lava.Region;
 	}
 
 	//draw cards and emit signal to client object that cards have been drawn

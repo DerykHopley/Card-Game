@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GameManager.cs" type="Script" id=1]
 [ext_resource path="res://Client.gd" type="Script" id=2]
@@ -9,9 +9,6 @@
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 5 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 149.625, 140.5 )
 
 [node name="Main" type="Node2D"]
 
@@ -277,103 +274,177 @@ polygon = PoolVector2Array( 8, 212, 8, 298, 154, 298, 153, 178, 81, 178 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Area2DMid" type="Area2D" parent="DropZone/DropZoneMid"]
-position = Vector2( 310, 6 )
-collision_mask = 2
-
-[node name="CollisionShape2DMid" type="CollisionShape2D" parent="DropZone/DropZoneMid/Area2DMid"]
-position = Vector2( 149, 141 )
-shape = SubResource( 1 )
-
 [node name="Lands" type="Control" parent="DropZone/DropZoneMid"]
 margin_left = 304.0
 margin_right = 304.0
 
-[node name="Land1" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
+[node name="LandTopRight" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
 position = Vector2( 230, 112 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 192, 0, 192, 192 )
 
-[node name="Land5" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
+[node name="Area2DMidLandTopRight" type="Area2D" parent="DropZone/DropZoneMid/Lands/LandTopRight"]
+position = Vector2( -280, -141.25 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneMid/Lands/LandTopRight/Area2DMidLandTopRight"]
+position = Vector2( -0.999985, -118 )
+polygon = PoolVector2Array( 297, 127, 297, 282, 224, 282, 224, 259, 152, 225, 152, 127 )
+
+[node name="LandTopLeft" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
 position = Vector2( 81, 112 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 192, 0, 192, 192 )
 
-[node name="Land2" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
+[node name="Area2DMidLandTopLeft" type="Area2D" parent="DropZone/DropZoneMid/Lands/LandTopLeft"]
+position = Vector2( -93.75, -141.25 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneMid/Lands/LandTopLeft/Area2DMidLandTopLeft"]
+position = Vector2( -6.00002, -118 )
+polygon = PoolVector2Array( 8.99999, 127, 8.99999, 282, 84, 282, 84, 259, 156, 224, 156, 127 )
+
+[node name="LandMid" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
 position = Vector2( 157, 166 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 192, 0, 192, 192 )
 
-[node name="Land3" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
+[node name="Area2DMidLandMid" type="Area2D" parent="DropZone/DropZoneMid/Lands/LandMid"]
+position = Vector2( -188.75, -208.75 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneMid/Lands/LandMid/Area2DMidLandMid"]
+position = Vector2( -6, -14 )
+polygon = PoolVector2Array( 85, 156, 85, 177, 157, 212, 229, 178, 229, 155, 156, 121 )
+
+[node name="LandBottomLeft" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
 position = Vector2( 81, 222 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 192, 0, 192, 192 )
 
-[node name="Land4" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
+[node name="Area2DMidLandBottomLeft" type="Area2D" parent="DropZone/DropZoneMid/Lands/LandBottomLeft"]
+position = Vector2( -93.75, -278.75 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneMid/Lands/LandBottomLeft/Area2DMidLandBottomLeft"]
+position = Vector2( -6, -14 )
+polygon = PoolVector2Array( 9.99999, 178, 9.99999, 298, 156, 298, 156, 212, 85, 178 )
+
+[node name="LandBottomRight" type="Sprite" parent="DropZone/DropZoneMid/Lands"]
 position = Vector2( 230, 222 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 192, 0, 192, 192 )
 
+[node name="Area2DMidLandBottomRight" type="Area2D" parent="DropZone/DropZoneMid/Lands/LandBottomRight"]
+position = Vector2( -280, -278.75 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneMid/Lands/LandBottomRight/Area2DMidLandBottomRight"]
+position = Vector2( 143, -14 )
+polygon = PoolVector2Array( 8, 212, 8, 298, 154, 298, 153, 178, 81, 178 )
+
 [node name="DropZoneRight" type="Control" parent="DropZone"]
 margin_right = 40.0
 margin_bottom = 40.0
-
-[node name="Area2DRight" type="Area2D" parent="DropZone/DropZoneRight"]
-position = Vector2( 614, 14 )
-collision_mask = 2
-
-[node name="CollisionShape2DRight" type="CollisionShape2D" parent="DropZone/DropZoneRight/Area2DRight"]
-position = Vector2( 149.25, 140 )
-shape = SubResource( 1 )
 
 [node name="Lands" type="Control" parent="DropZone/DropZoneRight"]
 margin_left = 609.0
 margin_right = 609.0
 
-[node name="Land1" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
+[node name="LandTopRight" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
 position = Vector2( 230, 128 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 768, 192, 192, 192 )
 
-[node name="Land5" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
+[node name="Area2DRightLandTopRight" type="Area2D" parent="DropZone/DropZoneRight/Lands/LandTopRight"]
+position = Vector2( -281.25, -142.5 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneRight/Lands/LandTopRight/Area2DRightLandTopRight"]
+position = Vector2( -0.999985, -118 )
+polygon = PoolVector2Array( 297, 127, 297, 282, 224, 282, 224, 259, 152, 225, 152, 127 )
+
+[node name="LandTopLeft" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
 position = Vector2( 81, 128 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 576, 192, 192, 192 )
 
-[node name="Land2" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
+[node name="Area2DRightLandTopLeft" type="Area2D" parent="DropZone/DropZoneRight/Lands/LandTopLeft"]
+position = Vector2( -95, -142.5 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneRight/Lands/LandTopLeft/Area2DRightLandTopLeft"]
+position = Vector2( -6.00002, -118 )
+polygon = PoolVector2Array( 8.99999, 127, 8.99999, 282, 84, 282, 84, 259, 118.624, 242.169, 156, 224, 156, 127 )
+
+[node name="LandMid" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
 position = Vector2( 157, 174 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 576, 192, 192, 192 )
 
-[node name="Land3" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
+[node name="Area2DRightLandMid" type="Area2D" parent="DropZone/DropZoneRight/Lands/LandMid"]
+position = Vector2( -190, -200 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneRight/Lands/LandMid/Area2DRightLandMid"]
+position = Vector2( -6, -14 )
+polygon = PoolVector2Array( 85, 156, 85, 177, 157, 212, 229, 178, 229, 155, 156, 121 )
+
+[node name="LandBottomLeft" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
 position = Vector2( 81, 230 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 576, 192, 192, 192 )
 
-[node name="Land4" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
+[node name="Area2DRightLandBottomLeft" type="Area2D" parent="DropZone/DropZoneRight/Lands/LandBottomLeft"]
+position = Vector2( -95, -270 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneRight/Lands/LandBottomLeft/Area2DRightLandBottomLeft"]
+position = Vector2( -6, -14 )
+polygon = PoolVector2Array( 9.99999, 178, 9.99999, 298, 156, 298, 156, 212, 85, 178 )
+
+[node name="LandBottomRight" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
 position = Vector2( 230, 230 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 576, 192, 192, 192 )
+
+[node name="Area2DRightLandBottomRight" type="Area2D" parent="DropZone/DropZoneRight/Lands/LandBottomRight"]
+position = Vector2( -281.25, -270 )
+scale = Vector2( 1.25, 1.25 )
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneRight/Lands/LandBottomRight/Area2DRightLandBottomRight"]
+position = Vector2( 143, -14 )
+polygon = PoolVector2Array( 8, 212, 8, 298, 154, 298, 153, 178, 81, 178 )
 
 [node name="PlayerZone" type="Panel" parent="."]
 margin_top = 1068.0
