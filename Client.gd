@@ -3,13 +3,19 @@ extends Node
 onready var Card = preload("res://Card.tscn")
 const colyseus = preload("res://addons/godot_colyseus/lib/colyseus.gd")
 var room: colyseus.Room
-
+var roomId = null
 #set up basic schema
+class FieldState extends colyseus.Schema:
+	static func define_fields():
+		return [
+			colyseus.Field.new("left", colyseus.STRING),
+			colyseus.Field.new("mid", colyseus.STRING),
+			colyseus.Field.new("right", colyseus.STRING),
+		]
 class GameState extends colyseus.Schema:
 	static func define_fields():
-		var mySynchronizedProperty = "Hello world"
 		return [
-			colyseus.Field.new("mySynchronizedProperty", colyseus.STRING, mySynchronizedProperty),
+			colyseus.Field.new("roomFields", colyseus.MAP, FieldState),
 		]
 
 func _ready():
@@ -21,6 +27,7 @@ func _ready():
 		print("Failed")
 		return
 	var room: colyseus.Room = promise.get_result()
+
 	room.on_message("server-message").on(funcref(self, "_on_server_message"))
 	room.on_message("game-message").on(funcref(self, "_on_game_message"))
 	room.on_message("client-request").on(funcref(self, "_on_client_request"))
@@ -30,7 +37,7 @@ func _ready():
 signal draw_cards
 
 #signal to request GameManager to instance player cards
-signal add_cards(count)
+signal game_start
 
 #signal to request GameManager to instance player cards
 signal deck_empty()
@@ -44,8 +51,14 @@ signal dropped_card
 #log server message to console
 func _on_server_message(data):
 	print(data)
+	if (data.type == "game_start"): 
+		print("Server Message:", data.FieldState.left, data.FieldState.mid, data.FieldState.right)
+		emit_signal("game_start", data.FieldState.left, data.FieldState.mid, data.FieldState.right)
+	
+
 #log game message to console
 func _on_game_message(data):
+	print(data)
 	print ("Game Message: " + data.type)
 	if (data.type == "cards_drawn"):
 		print ("Card Count: " + str(data))

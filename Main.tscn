@@ -23,29 +23,134 @@ margin_bottom = 214.0
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="OpponentZoneLeft" type="Panel" parent="OpponentZone"]
-margin_left = 6.0
-margin_top = 278.0
-margin_right = 306.0
-margin_bottom = 521.0
-rect_min_size = Vector2( 300, 0 )
-rect_pivot_offset = Vector2( 150, 190 )
+[node name="OpponentZoneLeft" type="Control" parent="OpponentZone"]
+margin_right = 40.0
+margin_bottom = 40.0
 
-[node name="OpponentZoneMid" type="Panel" parent="OpponentZone"]
-margin_left = 310.0
-margin_top = 270.0
-margin_right = 610.0
-margin_bottom = 513.0
-rect_min_size = Vector2( 300, 0 )
-rect_pivot_offset = Vector2( 150, 190 )
+[node name="Lands" type="Control" parent="OpponentZone/OpponentZoneLeft"]
+margin_right = 40.0
+margin_bottom = 40.0
 
-[node name="OpponentZoneRight" type="Panel" parent="OpponentZone"]
-margin_left = 614.0
-margin_top = 278.0
-margin_right = 914.0
-margin_bottom = 521.0
-rect_min_size = Vector2( 300, 0 )
-rect_pivot_offset = Vector2( 150, 190 )
+[node name="LandTopRight" type="Sprite" parent="OpponentZone/OpponentZoneLeft/Lands"]
+position = Vector2( 230, 354 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 192, 192 )
+
+[node name="LandTopLeft" type="Sprite" parent="OpponentZone/OpponentZoneLeft/Lands"]
+position = Vector2( 81, 354 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 192, 192 )
+
+[node name="LandMid" type="Sprite" parent="OpponentZone/OpponentZoneLeft/Lands"]
+position = Vector2( 157, 408 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 192, 192 )
+
+[node name="LandBottomLeft" type="Sprite" parent="OpponentZone/OpponentZoneLeft/Lands"]
+position = Vector2( 81, 464 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 192, 192 )
+
+[node name="LandBottomRight" type="Sprite" parent="OpponentZone/OpponentZoneLeft/Lands"]
+position = Vector2( 230, 464 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 192, 192 )
+
+[node name="OpponentZoneMid" type="Control" parent="OpponentZone"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Lands" type="Control" parent="OpponentZone/OpponentZoneMid"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="LandTopRight" type="Sprite" parent="OpponentZone/OpponentZoneMid/Lands"]
+position = Vector2( 534, 344 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 192, 0, 192, 192 )
+
+[node name="LandTopLeft" type="Sprite" parent="OpponentZone/OpponentZoneMid/Lands"]
+position = Vector2( 385, 344 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 192, 0, 192, 192 )
+
+[node name="LandMid" type="Sprite" parent="OpponentZone/OpponentZoneMid/Lands"]
+position = Vector2( 461, 398 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 192, 0, 192, 192 )
+
+[node name="LandBottomLeft" type="Sprite" parent="OpponentZone/OpponentZoneMid/Lands"]
+position = Vector2( 385, 454 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 192, 0, 192, 192 )
+
+[node name="LandBottomRight" type="Sprite" parent="OpponentZone/OpponentZoneMid/Lands"]
+position = Vector2( 534, 454 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 192, 0, 192, 192 )
+
+[node name="OpponentZoneRight" type="Control" parent="OpponentZone"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Lands" type="Control" parent="OpponentZone/OpponentZoneRight"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="LandTopRight" type="Sprite" parent="OpponentZone/OpponentZoneRight/Lands"]
+position = Vector2( 839, 354 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 576, 192, 192, 192 )
+
+[node name="LandTopLeft" type="Sprite" parent="OpponentZone/OpponentZoneRight/Lands"]
+position = Vector2( 690, 354 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 576, 192, 192, 192 )
+
+[node name="LandMid" type="Sprite" parent="OpponentZone/OpponentZoneRight/Lands"]
+position = Vector2( 766, 408 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 576, 192, 192, 192 )
+
+[node name="LandBottomLeft" type="Sprite" parent="OpponentZone/OpponentZoneRight/Lands"]
+position = Vector2( 690, 464 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 576, 192, 192, 192 )
+
+[node name="LandBottomRight" type="Sprite" parent="OpponentZone/OpponentZoneRight/Lands"]
+position = Vector2( 839, 464 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 576, 192, 192, 192 )
 
 [node name="FieldZone" type="Control" parent="."]
 margin_right = 40.0
@@ -53,17 +158,17 @@ margin_bottom = 40.0
 
 [node name="FieldZoneLeft" type="Panel" parent="FieldZone"]
 margin_left = 6.0
-margin_top = 526.0
+margin_top = 582.0
 margin_right = 306.0
-margin_bottom = 767.0
+margin_bottom = 712.0
 rect_min_size = Vector2( 300, 0 )
 rect_pivot_offset = Vector2( 150, 190 )
 
 [node name="OpponentPowerPanelLeft" type="Panel" parent="FieldZone/FieldZoneLeft"]
 margin_left = 125.0
-margin_top = -15.0
+margin_top = -7.0
 margin_right = 175.0
-margin_bottom = 35.0
+margin_bottom = 43.0
 rect_min_size = Vector2( 50, 50 )
 rect_pivot_offset = Vector2( 25, 25 )
 
@@ -78,9 +183,9 @@ valign = 1
 
 [node name="PlayerPowerPanelLeft" type="Panel" parent="FieldZone/FieldZoneLeft"]
 margin_left = 125.0
-margin_top = 206.0
+margin_top = 92.0
 margin_right = 175.0
-margin_bottom = 256.0
+margin_bottom = 142.0
 rect_min_size = Vector2( 50, 50 )
 rect_pivot_offset = Vector2( 25, 25 )
 
@@ -95,17 +200,17 @@ valign = 1
 
 [node name="FieldZoneMid" type="Panel" parent="FieldZone"]
 margin_left = 310.0
-margin_top = 518.0
+margin_top = 574.0
 margin_right = 610.0
-margin_bottom = 759.0
+margin_bottom = 704.0
 rect_min_size = Vector2( 300, 0 )
 rect_pivot_offset = Vector2( 150, 190 )
 
 [node name="OpponentPowerPanelMid" type="Panel" parent="FieldZone/FieldZoneMid"]
 margin_left = 125.0
-margin_top = -15.0
+margin_top = -7.0
 margin_right = 175.0
-margin_bottom = 35.0
+margin_bottom = 43.0
 rect_min_size = Vector2( 50, 50 )
 rect_pivot_offset = Vector2( 25, 25 )
 
@@ -120,9 +225,9 @@ valign = 1
 
 [node name="PlayerPowerPanelMid" type="Panel" parent="FieldZone/FieldZoneMid"]
 margin_left = 125.0
-margin_top = 206.0
+margin_top = 92.0
 margin_right = 175.0
-margin_bottom = 256.0
+margin_bottom = 142.0
 rect_min_size = Vector2( 50, 50 )
 rect_pivot_offset = Vector2( 25, 25 )
 
@@ -137,17 +242,17 @@ valign = 1
 
 [node name="FieldZoneRight" type="Panel" parent="FieldZone"]
 margin_left = 614.0
-margin_top = 526.0
+margin_top = 582.0
 margin_right = 914.0
-margin_bottom = 767.0
+margin_bottom = 712.0
 rect_min_size = Vector2( 300, 0 )
 rect_pivot_offset = Vector2( 150, 190 )
 
 [node name="OpponentPowerPanelRight" type="Panel" parent="FieldZone/FieldZoneRight"]
 margin_left = 125.0
-margin_top = -15.0
+margin_top = -7.0
 margin_right = 175.0
-margin_bottom = 35.0
+margin_bottom = 43.0
 rect_min_size = Vector2( 50, 50 )
 rect_pivot_offset = Vector2( 25, 25 )
 
@@ -162,9 +267,9 @@ valign = 1
 
 [node name="PlayerPowerPanelRight" type="Panel" parent="FieldZone/FieldZoneRight"]
 margin_left = 125.0
-margin_top = 206.0
+margin_top = 92.0
 margin_right = 175.0
-margin_bottom = 256.0
+margin_bottom = 142.0
 rect_min_size = Vector2( 50, 50 )
 rect_pivot_offset = Vector2( 25, 25 )
 
@@ -191,7 +296,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="LandTopRight" type="Sprite" parent="DropZone/DropZoneLeft/Lands"]
-position = Vector2( 230, 128 )
+position = Vector2( 230, 120 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
@@ -203,11 +308,11 @@ scale = Vector2( 1.25, 1.25 )
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneLeft/Lands/LandTopRight/Area2DLeftLandTopRight"]
-position = Vector2( -0.999985, -118 )
+position = Vector2( -0.999985, -110 )
 polygon = PoolVector2Array( 297, 127, 297, 282, 224, 282, 224, 259, 152, 225, 152, 127 )
 
 [node name="LandTopLeft" type="Sprite" parent="DropZone/DropZoneLeft/Lands"]
-position = Vector2( 81, 128 )
+position = Vector2( 81, 120 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
@@ -219,7 +324,7 @@ scale = Vector2( 1.25, 1.25 )
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneLeft/Lands/LandTopLeft/Area2DLeftLandTopLeft"]
-position = Vector2( -6.00002, -118 )
+position = Vector2( -6.00002, -110 )
 polygon = PoolVector2Array( 8.99999, 127, 8.99999, 282, 84, 282, 84, 259, 156, 224, 156, 127 )
 
 [node name="LandMid" type="Sprite" parent="DropZone/DropZoneLeft/Lands"]
@@ -367,11 +472,11 @@ margin_left = 609.0
 margin_right = 609.0
 
 [node name="LandTopRight" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
-position = Vector2( 230, 128 )
+position = Vector2( 230, 120 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
-region_rect = Rect2( 768, 192, 192, 192 )
+region_rect = Rect2( 576, 192, 192, 192 )
 
 [node name="Area2DRightLandTopRight" type="Area2D" parent="DropZone/DropZoneRight/Lands/LandTopRight"]
 position = Vector2( -281.25, -142.5 )
@@ -379,11 +484,11 @@ scale = Vector2( 1.25, 1.25 )
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneRight/Lands/LandTopRight/Area2DRightLandTopRight"]
-position = Vector2( -0.999985, -118 )
+position = Vector2( -0.999985, -110 )
 polygon = PoolVector2Array( 297, 127, 297, 282, 224, 282, 224, 259, 152, 225, 152, 127 )
 
 [node name="LandTopLeft" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
-position = Vector2( 81, 128 )
+position = Vector2( 81, 120 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
@@ -395,7 +500,7 @@ scale = Vector2( 1.25, 1.25 )
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DropZone/DropZoneRight/Lands/LandTopLeft/Area2DRightLandTopLeft"]
-position = Vector2( -6.00002, -118 )
+position = Vector2( -6.00002, -110 )
 polygon = PoolVector2Array( 8.99999, 127, 8.99999, 282, 84, 282, 84, 259, 118.624, 242.169, 156, 224, 156, 127 )
 
 [node name="LandMid" type="Sprite" parent="DropZone/DropZoneRight/Lands"]
@@ -576,6 +681,7 @@ rect_pivot_offset = Vector2( 120, 141 )
 
 [connection signal="draw_cards" from="Client" to="GameManager" method="DrawCards"]
 [connection signal="dropped_card" from="Client" to="GameManager" method="RenderDrop"]
+[connection signal="game_start" from="Client" to="GameManager" method="GameStart"]
 [connection signal="render_cards" from="Client" to="GameManager" method="RenderCards"]
 [connection signal="button_down" from="DrawCards" to="Client" method="_on_drawcards_down"]
 [connection signal="button_down" from="AddCards" to="Client" method="_on_addcards_down"]

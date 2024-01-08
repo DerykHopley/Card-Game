@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using Cards;
 using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 public class GameManager : Node
 {
 	//expose card and card back in editor
@@ -31,35 +33,21 @@ public class GameManager : Node
 		public CardSubZone? SubZone;
 	}
 
-	public static class FieldZones
+	public Dictionary<string, FieldZone> FieldZones = new Dictionary<string, FieldZone>
 	{
-		public static class Ocean {
-			public static Rect2 Region = new Rect2(0,0,192,192);
-		}
-		public static class Grass {
-			public static Rect2 Region = new Rect2(192,0,192,192);
-		}
-		public static class Arctic {
-			public static Rect2 Region = new Rect2(384,0,192,192);
-		}
-		public static class Desert {
-			public static Rect2 Region = new Rect2(576,0,192,192);
-		}
-		public static class Hole {
-			public static Rect2 Region = new Rect2(0,192,192,192);
-		}
-		public static class Void {
-			public static Rect2 Region = new Rect2(192,192,192,192);
-		}
-		public static class Lava {
-			public static Rect2 Region = new Rect2(384,192,192,192);
-		}
-		public static class Forest {
-			public static Rect2 Region = new Rect2(576,192,192,192);
-		}
-		public static class Blackhole {
-			public static Rect2 Region = new Rect2(768,192,192,192);
-		}
+		{"Ocean", new FieldZone(){Region = new Rect2(0,0,192,192)}},
+		{"Grass", new FieldZone(){Region = new Rect2(192,0,192,192)}},
+		{"Arctic", new FieldZone(){Region = new Rect2(384,0,192,192)}},
+		{"Desert", new FieldZone(){Region = new Rect2(576,0,192,192)}},
+		{"Hole", new FieldZone(){Region = new Rect2(0,192,192,192)}},
+		{"Void", new FieldZone(){Region = new Rect2(192,192,192,192)}},
+		{"Lava", new FieldZone(){Region = new Rect2(384,192,192,192)}},
+		{"Forest", new FieldZone(){Region = new Rect2(576,192,192,192)}},
+		{"Blackhole", new FieldZone(){Region = new Rect2(768,192,192,192)}},
+	};
+
+	public class FieldZone {
+		public Rect2 Region;
 	}
 
 	//keep track of number of cards in dropzone
@@ -89,34 +77,29 @@ public class GameManager : Node
 		_player_deck = Cards.Cards.GetCards();
 		Cards.Cards.Shuffle(_player_deck);
 		//_events = Cards.Events.GetEvents();
-		
-		GameStart();
 
 		base._Ready();
 	}
 
-	private void GameStart()
+	private void GameStart(string left, string mid, string right)
 	{
-		//TODO: Set Random Field
+		GD.Print(left);
+		GD.Print(mid);
+		GD.Print(right);
 		//TODO: Make method
-		//TODO: Make Scene
-		((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandTopLeft")).RegionRect = FieldZones.Arctic.Region;
-		((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandTopRight")).RegionRect = FieldZones.Arctic.Region;
-		((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandMid")).RegionRect = FieldZones.Arctic.Region;
-		((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandBottomLeft")).RegionRect = FieldZones.Arctic.Region;
-		((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandBottomRight")).RegionRect = FieldZones.Arctic.Region;
-		
-		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandTopLeft")).RegionRect = FieldZones.Grass.Region;
-		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandTopRight")).RegionRect = FieldZones.Grass.Region;
-		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandMid")).RegionRect = FieldZones.Grass.Region;
-		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandBottomLeft")).RegionRect = FieldZones.Grass.Region;
-		((Sprite) GetParent().GetNode("DropZone/DropZoneMid/Lands/LandBottomRight")).RegionRect = FieldZones.Grass.Region;
-		
-		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandTopLeft")).RegionRect = FieldZones.Lava.Region;
-		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandTopRight")).RegionRect = FieldZones.Lava.Region;
-		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandMid")).RegionRect = FieldZones.Lava.Region;
-		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandBottomLeft")).RegionRect = FieldZones.Lava.Region;
-		((Sprite) GetParent().GetNode("DropZone/DropZoneRight/Lands/LandBottomRight")).RegionRect = FieldZones.Lava.Region;
+		//TODO: Make Scene / Scene state
+		//TODO: Set same for Opponent/Player (Server choice? Wait for server initialization)
+		foreach (int i in Enum.GetValues(typeof(CardSubZone))) 
+		{
+			((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[left].Region;
+			((Sprite) GetParent().GetNode<Sprite>("OpponentZone/OpponentZoneLeft/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[left].Region;
+
+			((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[mid].Region;
+			((Sprite) GetParent().GetNode<Sprite>("OpponentZone/OpponentZoneMid/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[mid].Region;
+
+			((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[right].Region;
+			((Sprite) GetParent().GetNode<Sprite>("OpponentZone/OpponentZoneRight/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[right].Region;
+		}
 	}
 
 	//draw cards and emit signal to client object that cards have been drawn
@@ -125,6 +108,10 @@ public class GameManager : Node
 		// check if _player_deck has cards
 		if (_player_deck != null && _player_deck.Any())
 		{
+			if (_player_deck.Count < cardCount)
+			{
+				cardCount = _player_deck.Count;
+			}
 			//get range, add to player hand and remove from deck
 			foreach (Card card in _player_deck.GetRange(0,cardCount).ToList())
 			{
@@ -133,6 +120,7 @@ public class GameManager : Node
 			}
 			EmitSignal(nameof(CardsDrawn), CardsInDropZone.PlayerHand.Count);
 		} else {
+			GD.Print("Deck Empty");
 			EmitSignal(nameof(DeckEmpty));
 		}
 	}

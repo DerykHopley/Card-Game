@@ -292,16 +292,18 @@ public class Drag : CardPanel
 				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandMid")).Position = new Vector2(157,174);
 				_isOverLeftLandBottomLeft = false;
 				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandBottomLeft")).Position = new Vector2(81,230);
+
 				_isOverMidLandTopLeft = false;
-				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandTopLeft")).Position = new Vector2(81,118);
-				_isOverMidLandBottomRight = false;
-				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandBottomRight")).Position = new Vector2(230,220);
+				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandTopLeft")).Position = new Vector2(81,112);
 				_isOverMidLandTopRight = false;
-				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandTopRight")).Position = new Vector2(230,118);
+				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandTopRight")).Position = new Vector2(230,112);
 				_isOverMidLandMid = false;
-				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandMid")).Position = new Vector2(157,164);
+				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandMid")).Position = new Vector2(157,166);
 				_isOverMidLandBottomLeft = false;
-				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandBottomLeft")).Position = new Vector2(81,220);
+				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandBottomLeft")).Position = new Vector2(81,222);
+				_isOverMidLandBottomRight = false;
+				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandBottomRight")).Position = new Vector2(230,222);
+
 				_isOverRightLandTopLeft = false;
 				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/LandTopLeft")).Position = new Vector2(81,128);
 				_isOverRightLandTopRight = false;
@@ -313,60 +315,6 @@ public class Drag : CardPanel
 				_isOverRightLandBottomRight = false;
 				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/LandBottomRight")).Position = new Vector2(230,230);
 				
-				
-				
-				
-				/* else if (_isOverMidDropZone)
-				{
-					//TODO: make method
-					if (_gm.CardsInDropZone.PlayerMid.Count < 2) {
-						//TODO: make method
-						RectPosition = new Vector2((_gm.CardsInDropZone.PlayerMid.Count * 110) + 355, 784);
-						RectScale = new Vector2((float)0.7,(float)0.7);
-						_gm.Drop(Card,"Mid", ZoneState.ToString());
-						ZoneState = Zone.Mid;
-					} else if (_gm.CardsInDropZone.PlayerMid.Count < 4) {
-						//TODO: make method
-						RectPosition = new Vector2(((_gm.CardsInDropZone.PlayerMid.Count-2) * 110) + 355, 909);
-						RectScale = new Vector2((float)0.7,(float)0.7);
-						_gm.Drop(Card,"Mid", ZoneState.ToString());
-						ZoneState = Zone.Mid;
-					} else {
-						//TODO: make method
-						RectPosition = _startPosition;
-						RectScale = new Vector2(1,1);
-						_gm.Drop(Card, "Hand", ZoneState.ToString());
-						ZoneState = Zone.Hand;
-					}
-					
-				}
-				else if (_isOverRightDropZone)
-				{
-					if (_gm.CardsInDropZone.PlayerRight.Count < 2) {
-						RectPosition = new Vector2((_gm.CardsInDropZone.PlayerRight.Count * 110) + 660, 792);
-						RectScale = new Vector2((float)0.7,(float)0.7);
-						_gm.Drop(Card,"Right", ZoneState.ToString());
-						ZoneState = Zone.Right;
-					} else if (_gm.CardsInDropZone.PlayerRight.Count < 4) {
-						RectPosition = new Vector2(((_gm.CardsInDropZone.PlayerRight.Count-2) * 110) + 660, 917);
-						RectScale = new Vector2((float)0.7,(float)0.7);
-						_gm.Drop(Card,"Right", ZoneState.ToString());
-						ZoneState = Zone.Right;
-					} else {
-						//TODO: make method
-						RectPosition = _startPosition;
-						RectScale = new Vector2(1,1);
-						_gm.Drop(Card, "Hand", ZoneState.ToString());
-						ZoneState = Zone.Hand;
-					}
-				}
-				else
-				{
-					RectPosition = _startPosition;
-					RectScale = new Vector2(1,1);
-					_gm.Drop(Card, "Hand", ZoneState.ToString());
-					ZoneState = Zone.Hand;
-				} */
 			}
 		}
 		base._Process(delta);
