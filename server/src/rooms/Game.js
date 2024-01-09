@@ -6,12 +6,19 @@ export class Game extends Room {
 
     //support only 2 clients connected
     maxClients = 2;
+    fields = ["Arctic","Lava","Grass","Ocean","Desert","Hole","Void","Blackhole"];
+    _initFields = {left:"",mid:"",right:""}
 
     //determine what should happen when a room is created
     onCreate(options) {
-
+        //init 3 random fields
+        for (var field in this._initFields){
+            this._initFields[field] = this.fields.splice(Math.floor(Math.random()*this.fields.length), 1)[0];
+        }
+        
         console.log("Game Room created!", options);
         console.log("Room ID: " + this.roomId);
+        console.log("Game Room fields!", this._initFields);
 
         //set a custom state from a created schema
         this.setState(new GameState());
@@ -29,6 +36,7 @@ export class Game extends Room {
 
         //when a message is received of type "client-request", respond to the sending client with the appropriate data
         this.onMessage("client-request", (client, message) => {
+            console.log("Sent Via Game.js", message);
             client.send("client-request", {kind: message}, { except: client });
         })
 
@@ -37,7 +45,9 @@ export class Game extends Room {
     //determine what should happen when a client joins
     onJoin(client, options) {
         console.log(client.sessionId, "joined!");
-        this.broadcast("server-message", {type:"game_start",FieldState:{left:"Arctic",mid:"Lava",right:"Ocean"}});
+        //TODO: fix to use actual GameState
+        this.broadcast("server-message", {type:"game_start",FieldState:this._initFields});
+        client.send("client-request",  {kind: "start_turn"})
     }
 
     //determine what should happen when a client leaves

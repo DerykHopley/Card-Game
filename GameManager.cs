@@ -35,7 +35,10 @@ public class GameManager : Node
 
 	public Dictionary<string, FieldZone> FieldZones = new Dictionary<string, FieldZone>
 	{
-		{"Ocean", new FieldZone(){Region = new Rect2(0,0,192,192)}},
+		{"Ocean", new FieldZone(){
+				Region = new Rect2(0,0,192,192)
+			}
+		},
 		{"Grass", new FieldZone(){Region = new Rect2(192,0,192,192)}},
 		{"Arctic", new FieldZone(){Region = new Rect2(384,0,192,192)}},
 		{"Desert", new FieldZone(){Region = new Rect2(576,0,192,192)}},
@@ -60,6 +63,8 @@ public class GameManager : Node
 	private List<Card> _player_deck_org;
 	private List<Card> _player_hand;
 	private List<Event> _events;
+	public int round;
+	public int energy;
 
 	public override void _Ready()
 	{
@@ -78,14 +83,14 @@ public class GameManager : Node
 		Cards.Cards.Shuffle(_player_deck);
 		//_events = Cards.Events.GetEvents();
 
+		round = 0;
+		energy = 0;
+
 		base._Ready();
 	}
 
 	private void GameStart(string left, string mid, string right)
 	{
-		GD.Print(left);
-		GD.Print(mid);
-		GD.Print(right);
 		//TODO: Make method
 		//TODO: Make Scene / Scene state
 		//TODO: Set same for Opponent/Player (Server choice? Wait for server initialization)
@@ -100,6 +105,17 @@ public class GameManager : Node
 			((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[right].Region;
 			((Sprite) GetParent().GetNode<Sprite>("OpponentZone/OpponentZoneRight/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[right].Region;
 		}
+		round++;
+		((Label) GetParent().GetNode("PlayerZone/PlayerTurnPanel/PlayerTurn")).Text = round.ToString();
+		energy++;
+		//TODO: Make scene listen to signal on energy change
+		((Label) GetParent().GetNode("PlayerZone/PlayerEnergyPanel/PlayerEnergy")).Text = energy.ToString();
+	}
+
+	private void EvaluateTurn()
+	{
+		GD.Print(CardsInDropZone.PlayerLeft);
+		GD.Print(CardsInDropZone.OpponentLeft);
 	}
 
 	//draw cards and emit signal to client object that cards have been drawn
@@ -128,7 +144,7 @@ public class GameManager : Node
 	private void drawCard(Card _card)
 	{
 		CardPanel card = CardScene.Instance<CardPanel>();
-		card.RectPosition = new Vector2((CardsInDropZone.PlayerHand.Count * 130) + 10, 1082);
+		card.RectPosition = new Vector2((CardsInDropZone.PlayerHand.Count * 130) + 96, 1082);
 		//Random r = new Random();
 		//card.RectRotation = r.Next(-3,3);
 
@@ -223,6 +239,11 @@ public class GameManager : Node
 			//TODO: Make reusable method
 			int playerPowerLeft = CardsInDropZone.PlayerLeft.Sum(item => item.Power);
 			((Label)GetParent().GetNode<Label>("FieldZone/FieldZoneLeft/PlayerPowerPanelLeft/PlayerTotalPowerLeft")).Text = playerPowerLeft.ToString();
+
+			//TODO: setup refresh of other cards
+			//TODO: Autoload Singleton? https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html
+			energy = energy-card.Cost;
+			((Label) GetParent().GetNode("PlayerZone/PlayerEnergyPanel/PlayerEnergy")).Text = energy.ToString();
 		} 
 		else if (_played_zone.Zone == CardZone.Mid)
 		{
@@ -242,6 +263,7 @@ public class GameManager : Node
 		} 
 		else {
 			CardsInDropZone.PlayerHand.Add(card);
+			energy = energy+card.Cost;
 		}
 
 		if (old_area == "Left")
@@ -251,14 +273,16 @@ public class GameManager : Node
 			//TODO: Make reusable method (field state)
 			int playerPowerLeft = CardsInDropZone.PlayerLeft.Sum(item => item.Power);
 			((Label)GetParent().GetNode<Label>("FieldZone/FieldZoneLeft/PlayerPowerPanelLeft/PlayerTotalPowerLeft")).Text = playerPowerLeft.ToString();
-		} else if (old_area == "Mid")
+		} 
+		else if (old_area == "Mid")
 		{
 			CardsInDropZone.PlayerMid.Remove(card);
 			CardsInDropZone.PlayerHand.Add(card);
 			//TODO: Make reusable method (field state)
 			int playerPowerMid = CardsInDropZone.PlayerMid.Sum(item => item.Power);
 			((Label)GetParent().GetNode<Label>("FieldZone/FieldZoneMid/PlayerPowerPanelMid/PlayerTotalPowerMid")).Text = playerPowerMid.ToString();
-		} else if (old_area == "Right")
+		} 
+		else if (old_area == "Right")
 		{
 			CardsInDropZone.PlayerRight.Remove(card);
 			CardsInDropZone.PlayerHand.Add(card);
@@ -266,7 +290,12 @@ public class GameManager : Node
 			int playerPowerRight = CardsInDropZone.PlayerRight.Sum(item => item.Power);
 			((Label)GetParent().GetNode<Label>("FieldZone/FieldZoneRight/PlayerPowerPanelRight/PlayerTotalPowerRight")).Text = playerPowerRight.ToString();
 		}
-
+		
+		//Refresh cards
+		foreach (CardPanel child in GetChildren()){
+			GD.Print(child.Card.Id+":"+child.Card.InPlay);
+			child._Ready();
+		}
 		EmitSignal(nameof(CardDropped), _played_zone.Zone.ToString(), _played_zone.SubZone.ToString(), card.GetJSON());
 	}
 

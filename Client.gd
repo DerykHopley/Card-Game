@@ -33,14 +33,19 @@ func _ready():
 	room.on_message("client-request").on(funcref(self, "_on_client_request"))
 	self.room = room
 
+#func _init():
+
 #signal to request GameManager to instance player cards
 signal draw_cards
+
+#signal to request GameManager to instance player cards
+signal evaluate_turn
 
 #signal to request GameManager to instance player cards
 signal game_start
 
 #signal to request GameManager to instance player cards
-signal deck_empty()
+signal deck_empty
 
 #signal to request GameManager to render opponent cards
 signal render_cards(count)
@@ -50,10 +55,11 @@ signal dropped_card
 
 #log server message to console
 func _on_server_message(data):
-	print(data)
 	if (data.type == "game_start"): 
 		print("Server Message:", data.FieldState.left, data.FieldState.mid, data.FieldState.right)
 		emit_signal("game_start", data.FieldState.left, data.FieldState.mid, data.FieldState.right)
+	else:
+		print(data)
 	
 
 #log game message to console
@@ -70,25 +76,17 @@ func _on_game_message(data):
 
 #log client request to console and draw cards
 func _on_client_request(data):
-	print ("Client Request: " + data.kind)
-	if (data.kind == "draw"):
+	print (data)
+	#startgame /first turn
+	if (data.kind == "start_turn"):
 		emit_signal("draw_cards",3)
-	elif (data.kind == "add"):
-		emit_signal("draw_cards",1)
-
-#send request to server to draw cards on button down
-func _on_drawcards_down():
-	print ("Button Draw Cards")
-	room.send("client-request", "draw")
-
-func _on_addcards_down():
-	print ("Button Add Cards")
-	room.send("client-request", "add")
+	#next turn
+	elif (data.kind == "end_turn"):
+		emit_signal("evaluate_turn")
 
 #send message to server that cards have been drawn
 func _on_cards_drawn(i):
-	var cards_drawn = {"type": "cards_drawn","count": i
-	}
+	var cards_drawn = {"type": "cards_drawn","count": i}
 	room.send("game-message", cards_drawn)
 
 #send message to server that card has been dropped
@@ -104,3 +102,7 @@ func _on_card_dropped(zone, subzone, card):
 #send message to server that card has been dropped
 func _on_deck_empty():
 	room.send("game-message", {"type": "deck_empty"})
+
+func _on_end_turn_down():
+	print ("End Turn")
+	room.send("client-request", "end_turn")

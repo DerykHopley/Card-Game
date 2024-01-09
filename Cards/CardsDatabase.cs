@@ -73,6 +73,7 @@ namespace Cards {
 		public string Type {get; set;}
 		public string Name {get; set;}
 		public int Cost { get; set; }
+		public bool InPlay { get; set; }
 		public bool CostReduced { get; set; }
 		public bool CostIncreased { get; set; }
 		public int Power { get; set; }

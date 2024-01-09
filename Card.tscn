@@ -208,7 +208,7 @@ visible = false
 position = Vector2( 62, 88.1111 )
 scale = Vector2( 3.77778, 3.77778 )
 frames = SubResource( 38 )
-frame = 17
+frame = 21
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -281,6 +281,13 @@ custom_fonts/font = SubResource( 2 )
 text = "<Name>"
 align = 1
 valign = 1
+
+[node name="Visible" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 128.0
+margin_right = 56.0
+margin_bottom = 137.0
+text = "draggable"
 
 [connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExited"]

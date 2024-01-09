@@ -35,7 +35,7 @@
     "Id": "Guardian123",
     "Type": "Units",
     "Power": 1,
-    "Cost": 2,
+    "Cost": 1,
     "Name": "Guardian",
     "Effect": "Reduces all negative enemy Powers by 1 here"
   },
@@ -43,7 +43,7 @@
     "Id": "Knight123",
     "Type": "Units",
     "Power": 2,
-    "Cost": 3,
+    "Cost": 1,
     "Name": "Knight",
     "Effect": "Reduces adjacent negative enemy Powers by 1 here"
   },
@@ -51,7 +51,7 @@
     "Id": "Mercenary123",
     "Type": "Units",
     "Power": 4,
-    "Cost": 3,
+    "Cost": 1,
     "Name": "Mercenary",
     "Effect": "Melee,\nAlways Retaliates\nReturn to Supply when damaged\nor at start of next turn\nAfter played, increase\ncost by 1"
   },
@@ -67,7 +67,7 @@
     "Id": "Mentor123",
       "Type": "Units",
       "Power": 3,
-      "Cost": 3,
+      "Cost": 1,
       "Name": "Mentor",
       "Effect": "Melee,\nWhen played give\nfriendly unit +2 Power"
   },

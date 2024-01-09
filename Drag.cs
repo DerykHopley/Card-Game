@@ -7,7 +7,7 @@ public class Drag : CardPanel
 	//create private variables to store initial data
 	private bool _mouseIn = false;
 	private bool _isDragging = false;
-	private bool _isPlayed = false;
+	private bool _isDraggable = false;
 	private enum Played {Hand, Played, Discarded, Destroyed}
 	private enum Turn {Start,Mid,End}
 
@@ -35,17 +35,26 @@ public class Drag : CardPanel
 	public override void _Ready()
 	{
 		//store start position and locate GameManager
+		//TODO: start/hand position should be remembered after refresh
 		_startPosition = RectPosition;
 		_gm = GetParent<GameManager>();
 		((Label) GetNode("Id")).Text = Card.Id;
 		((Label) GetNode("BottomBarContainer/NameCenterContainer/Name")).Text = Card.Name;
 		((Label) GetNode("LeftMarginContainer/CenterContainer/Cost")).Text = Card.Cost.ToString();
 		((Label) GetNode("RightMarginContainer/CenterContainer/Power")).Text = Card.Power.ToString();
+
+		if (Card.Cost > _gm.energy && !Card.InPlay)
+		{
+			_isDraggable = false;
+			((Label) GetNode("Visible")).Text = "not draggable";
+		} else {
+			_isDraggable = true;
+		}
 	}
 
 	public override void _Process(float delta)
 	{
-		if (_mouseIn)
+		if (_mouseIn && _isDraggable)
 		{
 			//handle dragging and render card over other game objects
 			//GD.Print("Mouse Entered");
@@ -60,7 +69,9 @@ public class Drag : CardPanel
 			//handle dropping or return card to start position if not over dropzone
 			if (Input.IsActionJustReleased("left_click"))
 			{
+
 				_isDragging = false;
+				Card.InPlay = true;
 				if (_isOverLeftLandTopLeft)
 				{
 					//TODO: make method
@@ -270,9 +281,11 @@ public class Drag : CardPanel
 				} 
 				else 
 				{
+					GD.Print("Move to Hand");
 					//TODO: make method
 					RectPosition = _startPosition;
 					RectScale = new Vector2(1,1);
+					Card.InPlay = false;
 					_gm.Drop(
 						Card, 
 						new GameManager.CardPlayedZone(){
@@ -283,11 +296,11 @@ public class Drag : CardPanel
 
 				//Reset
 				_isOverLeftLandTopLeft = false;
-				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandTopLeft")).Position = new Vector2(81,128);
+				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandTopLeft")).Position = new Vector2(81,120);
+				_isOverLeftLandTopRight = false;
+				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandTopRight")).Position = new Vector2(230,120);
 				_isOverLeftLandBottomRight = false;
 				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandBottomRight")).Position = new Vector2(230,230);
-				_isOverLeftLandTopRight = false;
-				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandTopRight")).Position = new Vector2(230,128);
 				_isOverLeftLandMid = false;
 				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/LandMid")).Position = new Vector2(157,174);
 				_isOverLeftLandBottomLeft = false;
@@ -305,9 +318,9 @@ public class Drag : CardPanel
 				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/LandBottomRight")).Position = new Vector2(230,222);
 
 				_isOverRightLandTopLeft = false;
-				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/LandTopLeft")).Position = new Vector2(81,128);
+				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/LandTopLeft")).Position = new Vector2(81,120);
 				_isOverRightLandTopRight = false;
-				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/LandTopRight")).Position = new Vector2(230,128);
+				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/LandTopRight")).Position = new Vector2(230,120);
 				_isOverRightLandMid = false;
 				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/LandMid")).Position = new Vector2(157,174);
 				_isOverRightLandBottomLeft = false;
@@ -325,11 +338,25 @@ public class Drag : CardPanel
 	{
 		if (_isDragging) return;
 		_mouseIn = true;
+		if (Card.Cost > _gm.energy && !Card.InPlay)
+		{
+			_isDraggable = false;
+			((Label) GetNode("Visible")).Text = "not draggable";
+		} else {
+			_isDraggable = true;
+		}
 	}
 	//handle mouse exit signal
 	private void OnMouseExited()
 	{
 		_mouseIn = false;
+		if (Card.Cost > _gm.energy && !Card.InPlay)
+		{
+			_isDraggable = false;
+			((Label) GetNode("Visible")).Text = "not draggable";
+		} else {
+			_isDraggable = true;
+		}
 	}
 
 	//handle enter collision with dropzone signal
