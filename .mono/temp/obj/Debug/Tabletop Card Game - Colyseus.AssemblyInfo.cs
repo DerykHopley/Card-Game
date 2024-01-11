@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tabletop Card Game - Colyseus")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9932fcefcb3f3f4d0fd8c9750c1e702e8f00846d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27845bf2924aee20268ada0a0b8800902e946db2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tabletop Card Game - Colyseus")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tabletop Card Game - Colyseus")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

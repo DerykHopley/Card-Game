@@ -7,7 +7,6 @@ public class Drag : CardPanel
 	//create private variables to store initial data
 	private bool _mouseIn = false;
 	private bool _isDragging = false;
-	private bool _isDraggable = false;
 	private enum Played {Hand, Played, Discarded, Destroyed}
 	private enum Turn {Start,Mid,End}
 
@@ -29,32 +28,38 @@ public class Drag : CardPanel
 	private bool _isOverRightLandBottomRight = false;
 	private Vector2 _startPosition;
 	private GameManager _gm;
-	private GameManager.CardPlayedZone ZoneState;
 	private string _id;
 
 	public override void _Ready()
 	{
 		//store start position and locate GameManager
 		//TODO: start/hand position should be remembered after refresh
-		_startPosition = RectPosition;
+		if (_startPosition == new Vector2(0,0)){
+			_startPosition = RectPosition;
+		}
 		_gm = GetParent<GameManager>();
 		((Label) GetNode("Id")).Text = Card.Id;
 		((Label) GetNode("BottomBarContainer/NameCenterContainer/Name")).Text = Card.Name;
 		((Label) GetNode("LeftMarginContainer/CenterContainer/Cost")).Text = Card.Cost.ToString();
 		((Label) GetNode("RightMarginContainer/CenterContainer/Power")).Text = Card.Power.ToString();
+		_isDraggable();
+	}
 
-		if (Card.Cost > _gm.energy && !Card.InPlay)
+	private bool _isDraggable()
+	{
+		if ((Card.Cost > _gm.energy && !Card.InPlay) || Card.IsOpponentCard)
 		{
-			_isDraggable = false;
 			((Label) GetNode("Visible")).Text = "not draggable";
+			return false;
 		} else {
-			_isDraggable = true;
+			((Label) GetNode("Visible")).Text = "draggable";
+			return true;
 		}
 	}
 
 	public override void _Process(float delta)
 	{
-		if (_mouseIn && _isDraggable)
+		if (_mouseIn && _isDraggable())
 		{
 			//handle dragging and render card over other game objects
 			//GD.Print("Mouse Entered");
@@ -337,26 +342,15 @@ public class Drag : CardPanel
 	private void OnMouseEntered()
 	{
 		if (_isDragging) return;
+		_isDraggable();
 		_mouseIn = true;
-		if (Card.Cost > _gm.energy && !Card.InPlay)
-		{
-			_isDraggable = false;
-			((Label) GetNode("Visible")).Text = "not draggable";
-		} else {
-			_isDraggable = true;
-		}
+		
 	}
 	//handle mouse exit signal
 	private void OnMouseExited()
 	{
+		_isDraggable();
 		_mouseIn = false;
-		if (Card.Cost > _gm.energy && !Card.InPlay)
-		{
-			_isDraggable = false;
-			((Label) GetNode("Visible")).Text = "not draggable";
-		} else {
-			_isDraggable = true;
-		}
 	}
 
 	//handle enter collision with dropzone signal

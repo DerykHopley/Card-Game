@@ -53,6 +53,9 @@ signal render_cards(count)
 #signal to request GameManager to handle dropped card
 signal dropped_card
 
+#signal to request GameManager to handle dropped card
+signal evaluate_score
+
 #log server message to console
 func _on_server_message(data):
 	if (data.type == "game_start"): 
@@ -106,3 +109,7 @@ func _on_deck_empty():
 func _on_end_turn_down():
 	print ("End Turn")
 	room.send("client-request", "end_turn")
+
+func _on_evaluate_score():
+	print ("Evaluate Score")
+	emit_signal("evaluate_score")

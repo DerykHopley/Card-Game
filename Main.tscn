@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://GameManager.cs" type="Script" id=1]
 [ext_resource path="res://Client.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Card.tscn" type="PackedScene" id=4]
 [ext_resource path="res://theme/Pixel Square 10.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://theme/lands-sprite.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 5 )
@@ -176,7 +179,7 @@ rect_pivot_offset = Vector2( 25, 25 )
 margin_right = 50.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 5, 8 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 valign = 1
@@ -193,7 +196,7 @@ rect_pivot_offset = Vector2( 25, 25 )
 margin_right = 50.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 5, 8 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 valign = 1
@@ -218,7 +221,7 @@ rect_pivot_offset = Vector2( 25, 25 )
 margin_right = 50.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 5, 8 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 valign = 1
@@ -235,7 +238,7 @@ rect_pivot_offset = Vector2( 25, 25 )
 margin_right = 50.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 5, 8 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 valign = 1
@@ -260,7 +263,7 @@ rect_pivot_offset = Vector2( 25, 25 )
 margin_right = 50.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 5, 8 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 valign = 1
@@ -277,7 +280,7 @@ rect_pivot_offset = Vector2( 25, 25 )
 margin_right = 50.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 5, 8 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 valign = 1
@@ -709,9 +712,11 @@ rect_pivot_offset = Vector2( 120, 141 )
 
 [connection signal="draw_cards" from="Client" to="GameManager" method="DrawCards"]
 [connection signal="dropped_card" from="Client" to="GameManager" method="RenderDrop"]
+[connection signal="evaluate_score" from="Client" to="GameManager" method="EvaluateTurnScore"]
 [connection signal="evaluate_turn" from="Client" to="GameManager" method="EvaluateTurn"]
 [connection signal="game_start" from="Client" to="GameManager" method="GameStart"]
 [connection signal="render_cards" from="Client" to="GameManager" method="RenderCards"]
 [connection signal="button_down" from="EndTurn" to="Client" method="_on_end_turn_down"]
 [connection signal="CardDropped" from="GameManager" to="Client" method="_on_card_dropped"]
 [connection signal="CardsDrawn" from="GameManager" to="Client" method="_on_cards_drawn"]
+[connection signal="EvaluateScore" from="GameManager" to="Client" method="_on_evaluate_score"]
