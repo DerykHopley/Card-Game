@@ -5,17 +5,17 @@
     "tasks": [
         {
             "label": "build",
+            "group": "build",
             "command": "dotnet",
             "type": "shell",
             "args": [
-                "build",
-                // Ask dotnet build to generate full paths for file names.
-                "/property:GenerateFullPaths=true",
-                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
-                "/consoleloggerparameters:NoSummary",
-                "verbose=yes"
+                "msbuild",
+                "/restore",
+                "/t:Build",
+                "/p:Configuration=Debug",
+                "/v:normal",
+                "/p:GodotTargetPlatform=windows"
             ],
-            "group": "build",
             "problemMatcher": "$msCompile"
         }
     ]

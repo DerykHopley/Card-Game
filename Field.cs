@@ -17,11 +17,11 @@ public class Field : Node
 
     private void EvaluateScore()
     {
-        GD.Print(CardsInDropZone.OpponentLeft.Count);
+        /* GD.Print(OpponentLeft.HasCards());
         if (CardsInDropZone.OpponentLeft.Count > 0){
             int opponentPowerLeft = CardsInDropZone.OpponentLeft.Sum(card=>card.Power);
             ((Label) GetNode<Label>("FieldZone/FieldZoneLeft/OpponentPowerPanelLeft/OpponentTotalPowerLeft")).Text = opponentPowerLeft.ToString();
-        }
+        } */
         
         /* 
         int opponentPowerMid = _gm.CardsInDropZone.OpponentMid.Sum(item => item.Power);

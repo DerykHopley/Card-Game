@@ -303,7 +303,7 @@ position = Vector2( 230, 120 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
-region_rect = Rect2( 768, 0, 192, 192 )
+region_rect = Rect2( 576, 0, 192, 192 )
 
 [node name="Area2DLeftLandTopRight" type="Area2D" parent="DropZone/DropZoneLeft/Lands/LandTopRight"]
 position = Vector2( -280, -142.5 )
@@ -319,7 +319,7 @@ position = Vector2( 81, 120 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
-region_rect = Rect2( 768, 0, 192, 192 )
+region_rect = Rect2( 576, 0, 192, 192 )
 
 [node name="Area2DLeftLandTopLeft" type="Area2D" parent="DropZone/DropZoneLeft/Lands/LandTopLeft"]
 position = Vector2( -93.75, -142.5 )
@@ -712,11 +712,11 @@ rect_pivot_offset = Vector2( 120, 141 )
 
 [connection signal="draw_cards" from="Client" to="GameManager" method="DrawCards"]
 [connection signal="dropped_card" from="Client" to="GameManager" method="RenderDrop"]
-[connection signal="evaluate_score" from="Client" to="GameManager" method="EvaluateTurnScore"]
-[connection signal="evaluate_turn" from="Client" to="GameManager" method="EvaluateTurn"]
+[connection signal="end_round" from="Client" to="GameManager" method="EndRound"]
 [connection signal="game_start" from="Client" to="GameManager" method="GameStart"]
+[connection signal="next_round" from="Client" to="GameManager" method="StartRound"]
 [connection signal="render_cards" from="Client" to="GameManager" method="RenderCards"]
-[connection signal="button_down" from="EndTurn" to="Client" method="_on_end_turn_down"]
+[connection signal="button_down" from="EndTurn" to="Client" method="_on_end_round_down"]
 [connection signal="CardDropped" from="GameManager" to="Client" method="_on_card_dropped"]
 [connection signal="CardsDrawn" from="GameManager" to="Client" method="_on_cards_drawn"]
-[connection signal="EvaluateScore" from="GameManager" to="Client" method="_on_evaluate_score"]
+[connection signal="NextRound" from="GameManager" to="Client" method="_on_next_round"]

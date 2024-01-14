@@ -1,5 +1,14 @@
 [
   {
+    "Id": "VoidFish123",
+    "Name": "VoidFish",
+    "Type": "Units",
+    "Power": 1,
+    "Cost": 1,
+    "StartEffect": "Merge with another VoidFish here",
+    "EndEffect": "Duplicate and fill another empty position"
+  },
+  {
     "Id": "Footman123",
     "Name": "Footman",
     "Type": "Units",

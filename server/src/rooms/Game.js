@@ -49,7 +49,7 @@ export class Game extends Room {
         //Trigger game env setup
         this.broadcast("server-message", {type:"game_start",FieldState:this._initFields});
         //Trigger first turn
-        client.send("client-request",  {kind: "start_turn"})
+        client.send("client-request",  {kind: "start_game"})
     }
 
     //determine what should happen when a client leaves

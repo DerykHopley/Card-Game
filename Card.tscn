@@ -208,7 +208,7 @@ visible = false
 position = Vector2( 62, 88.1111 )
 scale = Vector2( 3.77778, 3.77778 )
 frames = SubResource( 38 )
-frame = 28
+frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -288,6 +288,13 @@ margin_top = 128.0
 margin_right = 56.0
 margin_bottom = 137.0
 text = "draggable"
+
+[node name="IsCopy" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 112.0
+margin_right = 73.0
+margin_bottom = 121.0
+text = "IsOriginal"
 
 [connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExited"]

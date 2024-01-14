@@ -39,9 +39,6 @@ func _ready():
 signal draw_cards
 
 #signal to request GameManager to instance player cards
-signal evaluate_turn
-
-#signal to request GameManager to instance player cards
 signal game_start
 
 #signal to request GameManager to instance player cards
@@ -54,7 +51,10 @@ signal render_cards(count)
 signal dropped_card
 
 #signal to request GameManager to handle dropped card
-signal evaluate_score
+signal end_round
+
+#signal to request GameManager to handle dropped card
+signal next_round
 
 #log server message to console
 func _on_server_message(data):
@@ -71,7 +71,6 @@ func _on_game_message(data):
 	print ("Game Message: " + data.type)
 	if (data.type == "cards_drawn"):
 		print ("Card Count: " + str(data))
-		#emit_signal("render_cards", data.count)
 	elif (data.type == "card_dropped"):
 		emit_signal("dropped_card", data.zone, data.subzone, data.card)
 	elif (data.type == "card_addeded"):
@@ -81,11 +80,13 @@ func _on_game_message(data):
 func _on_client_request(data):
 	print (data)
 	#startgame /first turn
-	if (data.kind == "start_turn"):
+	if (data.kind == "start_game"):
 		emit_signal("draw_cards",3)
 	#next turn
-	elif (data.kind == "end_turn"):
-		emit_signal("evaluate_turn")
+	elif (data.kind == "next_round"):
+		emit_signal("next_round")
+	elif (data.kind == "end_round"):
+		emit_signal("end_round")
 
 #send message to server that cards have been drawn
 func _on_cards_drawn(i):
@@ -106,10 +107,10 @@ func _on_card_dropped(zone, subzone, card):
 func _on_deck_empty():
 	room.send("game-message", {"type": "deck_empty"})
 
-func _on_end_turn_down():
-	print ("End Turn")
-	room.send("client-request", "end_turn")
+func _on_end_round_down():
+	print ("End Round")
+	room.send("client-request", "end_round")
 
-func _on_evaluate_score():
-	print ("Evaluate Score")
-	emit_signal("evaluate_score")
+func _on_next_round():
+	print ("Next Round")
+	room.send("client-request", "next_round")

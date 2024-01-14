@@ -5,15 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
+            "name": "Launch",
+            "type": "godot-mono",
             "request": "launch",
-            //"preLaunchTask": "build",
-            "program": "C:/Users/Deryk/Downloads/Godot_v3.5.3-stable_mono_win64/Godot_v3.5.3-stable_mono_win64/Godot_v3.5.3-stable_mono_win64.exe",
-            "args": ["--path","--verbose"],
-            "cwd": "${workspaceFolder}",
-            "stopAtEntry": false,
-            "console": "internalConsole",
+            "mode": "executable",
+            "preLaunchTask": "build",
+            "executable": "C:/Users/Deryk/Downloads/Godot_v3.5.3-stable_mono_win64/Godot_v3.5.3-stable_mono_win64/Godot_v3.5.3-stable_mono_win64.exe",
+            "executableArguments": [
+                "--path",
+                "--verbose",
+                "${workspaceFolder}"
+            ],
         },
         {
             "name": ".NET Core Attach",

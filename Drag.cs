@@ -1,4 +1,4 @@
-using Cards;
+using CardCollection;
 using Godot;
 using System;
 
@@ -28,7 +28,6 @@ public class Drag : CardPanel
 	private bool _isOverRightLandBottomRight = false;
 	private Vector2 _startPosition;
 	private GameManager _gm;
-	private string _id;
 
 	public override void _Ready()
 	{
@@ -81,42 +80,36 @@ public class Drag : CardPanel
 				{
 					//TODO: make method
 					//Top left
-					RectPosition = new Vector2(34, 782);
+					RectPosition = (Vector2)Card.Zone.Position();
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Left,
-							SubZone = GameManager.CardSubZone.TopLeft
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Left,
+						SubZone = CardSubZone.TopLeft
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandTopRight) 
 				{
 					//Top right
-					RectPosition = new Vector2(188, 782);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Left,
+						SubZone = CardSubZone.TopRight
+					};
+					RectPosition = (Vector2)Card.Zone.Position();
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Left,
-							SubZone = GameManager.CardSubZone.TopRight
-						}
-					);
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandMid) 
 				{
 					//TODO: make method
 					//Mid
-					RectPosition = new Vector2(112, 847);
+					RectPosition = (Vector2)Card.Zone.Position();
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Left,
-							SubZone = GameManager.CardSubZone.Mid
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Left,
+						SubZone = CardSubZone.Mid
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandBottomLeft) 
 				{
@@ -124,13 +117,11 @@ public class Drag : CardPanel
 					//Bottom left
 					RectPosition = new Vector2(34, 917);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Left,
-							SubZone = GameManager.CardSubZone.BottomLeft
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Left,
+						SubZone = CardSubZone.BottomLeft
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandBottomRight) 
 				{
@@ -138,13 +129,11 @@ public class Drag : CardPanel
 					//Bottom right
 					RectPosition = new Vector2(188, 917);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Left,
-							SubZone = GameManager.CardSubZone.BottomRight
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Left,
+						SubZone = CardSubZone.BottomRight
+					};
+					_gm.Drop(Card, null);
 				}
 				else if (_isOverMidLandTopLeft)
 				{
@@ -152,26 +141,22 @@ public class Drag : CardPanel
 					//Top left
 					RectPosition = new Vector2(338, 772);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Mid,
-							SubZone = GameManager.CardSubZone.TopLeft
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Mid,
+						SubZone = CardSubZone.TopLeft
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverMidLandTopRight) 
 				{
 					//Top right
 					RectPosition = new Vector2(494, 772);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Mid,
-							SubZone = GameManager.CardSubZone.TopRight
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Mid,
+						SubZone = CardSubZone.TopRight
+					};
+					_gm.Drop(Card, null);;
 				} 
 				else if (_isOverMidLandMid) 
 				{
@@ -179,13 +164,11 @@ public class Drag : CardPanel
 					//Mid
 					RectPosition = new Vector2(416, 837);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Mid,
-							SubZone = GameManager.CardSubZone.Mid
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Mid,
+						SubZone = CardSubZone.Mid
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverMidLandBottomLeft) 
 				{
@@ -193,13 +176,11 @@ public class Drag : CardPanel
 					//Bottom left
 					RectPosition = new Vector2(338, 907);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Mid,
-							SubZone = GameManager.CardSubZone.BottomLeft
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Mid,
+						SubZone = CardSubZone.BottomLeft
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverMidLandBottomRight) 
 				{
@@ -207,13 +188,11 @@ public class Drag : CardPanel
 					//Bottom right
 					RectPosition = new Vector2(494, 907);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Mid,
-							SubZone = GameManager.CardSubZone.BottomRight
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Mid,
+						SubZone = CardSubZone.BottomRight
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandTopLeft)
 				{
@@ -221,26 +200,22 @@ public class Drag : CardPanel
 					//Top left
 					RectPosition = new Vector2(642, 782);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Right,
-							SubZone = GameManager.CardSubZone.TopLeft
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Right,
+						SubZone = CardSubZone.TopLeft
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandTopRight) 
 				{
 					//Top right
 					RectPosition = new Vector2(798, 782);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Right,
-							SubZone = GameManager.CardSubZone.TopRight
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Right,
+						SubZone = CardSubZone.TopRight
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandMid) 
 				{
@@ -248,13 +223,11 @@ public class Drag : CardPanel
 					//Mid
 					RectPosition = new Vector2(720, 847);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Right,
-							SubZone = GameManager.CardSubZone.Mid
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Right,
+						SubZone = CardSubZone.Mid
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandBottomLeft) 
 				{
@@ -262,13 +235,11 @@ public class Drag : CardPanel
 					//Bottom left
 					RectPosition = new Vector2(642, 917);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Right,
-							SubZone = GameManager.CardSubZone.BottomLeft
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Right,
+						SubZone = CardSubZone.BottomLeft
+					};
+					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandBottomRight) 
 				{
@@ -276,13 +247,11 @@ public class Drag : CardPanel
 					//Bottom right
 					RectPosition = new Vector2(798, 917);
 					RectScale = new Vector2((float)0.7,(float)0.7);
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Right,
-							SubZone = GameManager.CardSubZone.BottomRight
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Right,
+						SubZone = CardSubZone.BottomRight
+					};
+					_gm.Drop(Card, null);
 				} 
 				else 
 				{
@@ -291,12 +260,10 @@ public class Drag : CardPanel
 					RectPosition = _startPosition;
 					RectScale = new Vector2(1,1);
 					Card.InPlay = false;
-					_gm.Drop(
-						Card, 
-						new GameManager.CardPlayedZone(){
-							Zone = GameManager.CardZone.Hand,
-						}
-					);
+					Card.Zone = new CardPlayedZone(){
+						Zone = CardZone.Hand
+					};
+					_gm.Drop(Card, null);
 				}
 
 				//Reset
