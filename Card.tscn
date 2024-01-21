@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Drag.cs" type="Script" id=1]
 [ext_resource path="res://theme/Pixel Square 10.ttf" type="DynamicFontData" id=2]
@@ -194,6 +194,36 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 2 )
 
+[sub_resource type="Animation" id=73]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=74]
+resource_name = "flip"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.1, 1 ), Vector2( 1, 1 ) ]
+}
+
 [node name="Card" type="Panel"]
 margin_right = 125.0
 margin_bottom = 175.0
@@ -208,7 +238,7 @@ visible = false
 position = Vector2( 62, 88.1111 )
 scale = Vector2( 3.77778, 3.77778 )
 frames = SubResource( 38 )
-frame = 4
+frame = 19
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -295,6 +325,10 @@ margin_top = 112.0
 margin_right = 73.0
 margin_bottom = 121.0
 text = "IsOriginal"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 73 )
+anims/flip = SubResource( 74 )
 
 [connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseExited"]

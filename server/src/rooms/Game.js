@@ -45,10 +45,10 @@ export class Game extends Room {
     //determine what should happen when a client joins
     onJoin(client, options) {
         console.log(client.sessionId, "joined!");
-        //TODO: fix to use actual GameState
-        //Trigger game env setup
-        this.broadcast("server-message", {type:"game_start",FieldState:this._initFields});
-        //Trigger first turn
+        //TODO: fix to use actual GameState ?
+        //Broadcast game start state
+        this.broadcast("server-message", {type: "game_start", FieldState:this._initFields});
+        //Send message to this clinet to start game
         client.send("client-request",  {kind: "start_game"})
     }
 

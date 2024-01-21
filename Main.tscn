@@ -303,7 +303,7 @@ position = Vector2( 230, 120 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
-region_rect = Rect2( 576, 0, 192, 192 )
+region_rect = Rect2( 768, 0, 192, 192 )
 
 [node name="Area2DLeftLandTopRight" type="Area2D" parent="DropZone/DropZoneLeft/Lands/LandTopRight"]
 position = Vector2( -280, -142.5 )
@@ -319,7 +319,7 @@ position = Vector2( 81, 120 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 region_enabled = true
-region_rect = Rect2( 576, 0, 192, 192 )
+region_rect = Rect2( 768, 0, 192, 192 )
 
 [node name="Area2DLeftLandTopLeft" type="Area2D" parent="DropZone/DropZoneLeft/Lands/LandTopLeft"]
 position = Vector2( -93.75, -142.5 )

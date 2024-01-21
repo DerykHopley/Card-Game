@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Globalization;
+using System.Security.Policy;
 public class GameManager : Node
 {
 	//expose card and card back in editor
@@ -75,9 +76,15 @@ public class GameManager : Node
 		public Rect2 Region;
 	}
 
+	public class Fields {
+		public string Left;
+		public string Mid;
+		public string Right;
+	}
+
 	//keep track of number of cards in dropzone
 	public static DropZones CardsInDropZone;
-
+	public static Fields GameFields;
 	//keep track of number of opponent card backs to render
 	private List<Panel> opponentCards = new List<Panel>();
 
@@ -109,20 +116,12 @@ public class GameManager : Node
 
 	private void GameStart(string left, string mid, string right)
 	{
-		//TODO: Make method
-		//TODO: Make Scene / Scene state
-		//TODO: Set same for Opponent/Player (Server choice? Wait for server initialization)
-		foreach (int i in Enum.GetValues(typeof(CardSubZone))) 
-		{
-			((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneLeft/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[left].Region;
-			((Sprite) GetParent().GetNode<Sprite>("OpponentZone/OpponentZoneLeft/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[left].Region;
-
-			((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneMid/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[mid].Region;
-			((Sprite) GetParent().GetNode<Sprite>("OpponentZone/OpponentZoneMid/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[mid].Region;
-
-			((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[right].Region;
-			((Sprite) GetParent().GetNode<Sprite>("OpponentZone/OpponentZoneRight/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[right].Region;
-		}
+		GameFields = new Fields(){
+			Left = left,
+			Mid = mid,
+			Right = right
+		};
+		UpdateField();
 		//TODO: Make scene listen to signal on energy change
 		round = 1;
 		energy = 1;
@@ -130,37 +129,41 @@ public class GameManager : Node
 		((Label) GetParent().GetNode("PlayerZone/PlayerEnergyPanel/PlayerEnergy")).Text = energy.ToString();
 	}
 
+	private void UpdateField()
+	{
+		string zone;
+		string field;
+		switch (round){
+			case 2:
+				zone = "Mid";
+				field = GameFields.Mid;
+			break;
+			case 3:
+				zone = "Right";
+				field = GameFields.Right;
+			break;
+			case 1:
+			default:
+				zone = "Left";
+				field = GameFields.Left;
+			break;
+		}
+		foreach (int i in Enum.GetValues(typeof(CardSubZone))) 
+		{
+			((Sprite) GetParent().GetNode<Sprite>("DropZone/DropZone"+zone+"/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[field].Region;
+			((Sprite) GetParent().GetNode<Sprite>("OpponentZone/OpponentZone"+zone+"/Lands/Land"+Enum.GetName(typeof(CardSubZone), i))).RegionRect = FieldZones[field].Region;
+		}
+	}
+
 	private void EndRound()
 	{
-		GD.Print("End Turn:");
-		if (CardsInDropZone.PlayerLeft.HasCards())
-		{		
-			foreach (var card in CardsInDropZone.PlayerLeft.GetCards().Where(item => item.Value != null).ToList())
-			{
-				string name = card.Value.Name;
-				Type type = Type.GetType("CardCollection." + name);
-				//Type type = Type.GetType("CardCollection.VoidFish");
-				if (type != null)
-				{
-					type.InvokeMember("EndTurn", 
-						BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static,
-						null,
-						null,
-						new object[] { this, card.Value, CardsInDropZone }
-					);
-				}
-			}
-			int? playerPowerLeft = CardsInDropZone.PlayerLeft.GetCards()
-				.Where(item => item.Value != null)
-				.Select(item => (int?)item.Value.Power)
-				.Sum();
-            GetParent().GetNode<Label>("FieldZone/FieldZoneLeft/PlayerPowerPanelLeft/PlayerTotalPowerLeft").Text = playerPowerLeft.ToString();
-        }
+		GD.Print("End Round:");
 		// Trigger actions of cards in dropped order
 		// trigger update of field power
 		// trigger
 		round++;
 		((Label) GetParent().GetNode("PlayerZone/PlayerTurnPanel/PlayerTurn")).Text = round.ToString();
+		UpdateField();
 		EmitSignal(nameof(NextRound));
 	}
 
@@ -172,12 +175,12 @@ public class GameManager : Node
 		((Label) GetParent().GetNode("PlayerZone/PlayerEnergyPanel/PlayerEnergy")).Text = energy.ToString();
 
 		if (CardsInDropZone.PlayerLeft.HasCards())
-		{		
+		{
 			foreach (var card in CardsInDropZone.PlayerLeft.GetCards().Where(item => item.Value != null).ToList())
 			{
 				string name = card.Value.Name;
-				//Type type = Type.GetType("CardCollection." + name);
-				Type type = Type.GetType("CardCollection.VoidFish");
+				Type type = Type.GetType("CardCollection." + name);
+				//Type type = Type.GetType("CardCollection.VoidFish");
 				if (type != null)
 				{
 					GD.Print("Call Method: CardCollection." + name + ".StartTurn()");
@@ -185,7 +188,7 @@ public class GameManager : Node
 						BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static,
 						null,
 						null,
-						new object[] { this, card.Value, CardsInDropZone }
+						new object[] { this, card.Value }
 					);
 				}
 			}

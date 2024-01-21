@@ -80,12 +80,12 @@ public class Drag : CardPanel
 				{
 					//TODO: make method
 					//Top left
-					RectPosition = (Vector2)Card.Zone.Position();
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Left,
 						SubZone = CardSubZone.TopLeft
 					};
+					RectPosition = (Vector2)Card.Zone.Position();
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandTopRight) 
@@ -103,154 +103,154 @@ public class Drag : CardPanel
 				{
 					//TODO: make method
 					//Mid
-					RectPosition = (Vector2)Card.Zone.Position();
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Left,
 						SubZone = CardSubZone.Mid
 					};
+					RectPosition = (Vector2)Card.Zone.Position();
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandBottomLeft) 
 				{
 					//TODO: make method
 					//Bottom left
-					RectPosition = new Vector2(34, 917);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Left,
 						SubZone = CardSubZone.BottomLeft
 					};
+					RectPosition = new Vector2(34, 917);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandBottomRight) 
 				{
 					//TODO: make method
 					//Bottom right
-					RectPosition = new Vector2(188, 917);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Left,
 						SubZone = CardSubZone.BottomRight
 					};
+					RectPosition = new Vector2(188, 917);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				}
 				else if (_isOverMidLandTopLeft)
 				{
 					//TODO: make method
 					//Top left
-					RectPosition = new Vector2(338, 772);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Mid,
 						SubZone = CardSubZone.TopLeft
 					};
+					RectPosition = new Vector2(338, 772);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverMidLandTopRight) 
 				{
 					//Top right
-					RectPosition = new Vector2(494, 772);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Mid,
 						SubZone = CardSubZone.TopRight
 					};
+					RectPosition = new Vector2(494, 772);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);;
 				} 
 				else if (_isOverMidLandMid) 
 				{
 					//TODO: make method
 					//Mid
-					RectPosition = new Vector2(416, 837);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Mid,
 						SubZone = CardSubZone.Mid
 					};
+					RectPosition = new Vector2(416, 837);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverMidLandBottomLeft) 
 				{
 					//TODO: make method
 					//Bottom left
-					RectPosition = new Vector2(338, 907);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Mid,
 						SubZone = CardSubZone.BottomLeft
 					};
+					RectPosition = new Vector2(338, 907);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverMidLandBottomRight) 
 				{
 					//TODO: make method
 					//Bottom right
-					RectPosition = new Vector2(494, 907);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Mid,
 						SubZone = CardSubZone.BottomRight
 					};
+					RectPosition = new Vector2(494, 907);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandTopLeft)
 				{
 					//TODO: make method
 					//Top left
-					RectPosition = new Vector2(642, 782);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Right,
 						SubZone = CardSubZone.TopLeft
 					};
+					RectPosition = new Vector2(642, 782);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandTopRight) 
 				{
 					//Top right
-					RectPosition = new Vector2(798, 782);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Right,
 						SubZone = CardSubZone.TopRight
 					};
+					RectPosition = new Vector2(798, 782);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandMid) 
 				{
 					//TODO: make method
 					//Mid
-					RectPosition = new Vector2(720, 847);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Right,
 						SubZone = CardSubZone.Mid
 					};
+					RectPosition = new Vector2(720, 847);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandBottomLeft) 
 				{
 					//TODO: make method
 					//Bottom left
-					RectPosition = new Vector2(642, 917);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Right,
 						SubZone = CardSubZone.BottomLeft
 					};
+					RectPosition = new Vector2(642, 917);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverRightLandBottomRight) 
 				{
 					//TODO: make method
 					//Bottom right
-					RectPosition = new Vector2(798, 917);
-					RectScale = new Vector2((float)0.7,(float)0.7);
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Right,
 						SubZone = CardSubZone.BottomRight
 					};
+					RectPosition = new Vector2(798, 917);
+					RectScale = new Vector2((float)0.7,(float)0.7);
 					_gm.Drop(Card, null);
 				} 
 				else 

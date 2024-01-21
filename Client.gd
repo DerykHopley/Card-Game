@@ -79,10 +79,8 @@ func _on_game_message(data):
 #log client request to console and draw cards
 func _on_client_request(data):
 	print (data)
-	#startgame /first turn
 	if (data.kind == "start_game"):
 		emit_signal("draw_cards",3)
-	#next turn
 	elif (data.kind == "next_round"):
 		emit_signal("next_round")
 	elif (data.kind == "end_round"):
@@ -113,4 +111,5 @@ func _on_end_round_down():
 
 func _on_next_round():
 	print ("Next Round")
+	yield(get_tree().create_timer(5),"timeout")
 	room.send("client-request", "next_round")
