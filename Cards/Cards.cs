@@ -79,6 +79,7 @@ namespace CardCollection
         public bool IsCopy { get; set; }
         public CardPlayedZone Zone { get; set; }
 		public bool IsOpponentCard { get; set; }
+		public string HasTweenMethod { get; set; } = "none";
 	}
 
 	public class Event

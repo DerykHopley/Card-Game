@@ -31,3 +31,4 @@ C:\Users\Deryk\development\Card-Game\.mono\temp\obj\Debug\Tabletop Card Game - C
 C:\Users\Deryk\development\Card-Game\.mono\temp\obj\Debug\Tabletop Card Game - Colyseus.csproj.CopyComplete
 C:\Users\Deryk\development\Card-Game\.mono\temp\obj\Debug\Tabletop Card Game - Colyseus.dll
 C:\Users\Deryk\development\Card-Game\.mono\temp\obj\Debug\Tabletop Card Game - Colyseus.pdb
+C:\Users\Deryk\development\Card-Game\.mono\temp\bin\Debug\MathFloat.dll

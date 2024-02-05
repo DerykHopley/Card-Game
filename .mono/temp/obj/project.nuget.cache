@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "DNKpaJBhaymLQIW7g/ogg3cbCe/nHBU/cgUUBXlXwdyTHm3eyywKvI+00rNxeFUsrg0TH+o9yi0dSOMz4l4Beg==",
+  "dgSpecHash": "6b6cm7vbx5uggpSMhJOdmI7vPO2hUI+Hd5kA70wu1C+Ou+Po27sy84fx2PpTxOlAZEImLJ6PvqXcwKeCgdCWFQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Deryk\\development\\Card-Game\\Tabletop Card Game - Colyseus.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Deryk\\.nuget\\packages\\mathfloat\\1.0.1\\mathfloat.1.0.1.nupkg.sha512",
     "C:\\Users\\Deryk\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []

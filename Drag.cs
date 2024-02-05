@@ -1,6 +1,7 @@
 using CardCollection;
 using Godot;
 using System;
+using System.Reflection;
 
 public class Drag : CardPanel
 {
@@ -26,16 +27,28 @@ public class Drag : CardPanel
 	private bool _isOverRightLandMid = false;
 	private bool _isOverRightLandBottomLeft = false;
 	private bool _isOverRightLandBottomRight = false;
-	private Vector2 _startPosition;
+	
 	private GameManager _gm;
 
-	public override void _Ready()
+	private Vector2 _playedScale = new Vector2((float)0.7,(float)0.7);
+	private Vector2 _handScale = new Vector2(1,1);
+	private Vector2 _draggingScale = new Vector2((float)0.8,(float)0.8);
+
+	private Vector2 _start_position;
+
+	[Export] 
+	float dur = (float)0.5;
+
+    public override void _Ready()
 	{
 		//store start position and locate GameManager
 		//TODO: start/hand position should be remembered after refresh
-		if (_startPosition == new Vector2(0,0)){
-			_startPosition = RectPosition;
+		_start_position = RectPosition;
+		if(Card.HasTweenMethod != "none")
+		{
+			TweenCard((Vector2)Card.Zone.Position());
 		}
+
 		_gm = GetParent<GameManager>();
 		((Label) GetNode("Id")).Text = Card.Id;
 		((Label) GetNode("BottomBarContainer/NameCenterContainer/Name")).Text = Card.Name;
@@ -56,8 +69,43 @@ public class Drag : CardPanel
 		}
 	}
 
-	public override void _Process(float delta)
+	private void TweenCard(Vector2 _destination, Vector2 _scale){
+		Tween tween = GetNode<Tween>("CardTween");
+		tween.InterpolateProperty(this,"rect_position", _start_position, _destination, dur, Tween.TransitionType.Back, Tween.EaseType.Out, 0);
+		tween.InterpolateProperty(this,"rect_scale", _draggingScale, _scale, dur, Tween.TransitionType.Back, Tween.EaseType.Out, 0);
+		tween.Start();
+	}
+	private void TweenCard(Vector2 _destination){
+		Tween tween = GetNode<Tween>("CardTween");
+		tween.InterpolateProperty(this,"rect_position", _start_position, _destination, dur, Tween.TransitionType.Back, Tween.EaseType.Out, 0);
+		tween.Start();
+	}
+
+	private void _on_CardTween_tween_completed(Godot.Object obj, NodePath key)
 	{
+		GD.Print("Tween completed: " + Card.HasTweenMethod);
+		if (Card.HasTweenMethod != "none")
+		{
+			// Will this cause endless loop. Check for tween versions?
+			string name = Card.Name;
+			string method = Card.HasTweenMethod;
+			Type type = Type.GetType("CardCollection." + name);
+			//Type type = Type.GetType("CardCollection.VoidFish");
+			if (type != null)
+			{
+				GD.Print("Call Method: CardCollection." + name + "." + method + "()");
+				type.InvokeMember(method, 
+					BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static,
+					null,
+					null,
+					new object[] { _gm, Card }
+				);
+			}
+		}
+	}
+
+    public override void _Input(InputEvent @event)
+    {
 		if (_mouseIn && _isDraggable())
 		{
 			//handle dragging and render card over other game objects
@@ -68,7 +116,7 @@ public class Drag : CardPanel
 				Vector2 _mousePosition = new Vector2(GetViewport().GetMousePosition());
 				RectPosition = new Vector2(_mousePosition.x - 40, _mousePosition.y - 40);
 				GetParent().MoveChild(this, GetParent().GetChildCount());
-				RectScale = new Vector2((float)0.8,(float)0.8);
+				RectScale = _draggingScale;
 			}
 			//handle dropping or return card to start position if not over dropzone
 			if (Input.IsActionJustReleased("left_click"))
@@ -84,8 +132,7 @@ public class Drag : CardPanel
 						Zone = CardZone.Left,
 						SubZone = CardSubZone.TopLeft
 					};
-					RectPosition = (Vector2)Card.Zone.Position();
-					RectScale = new Vector2((float)0.7,(float)0.7);
+					TweenCard((Vector2)Card.Zone.Position(), new Vector2((float)0.7,(float)0.7));
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandTopRight) 
@@ -95,8 +142,7 @@ public class Drag : CardPanel
 						Zone = CardZone.Left,
 						SubZone = CardSubZone.TopRight
 					};
-					RectPosition = (Vector2)Card.Zone.Position();
-					RectScale = new Vector2((float)0.7,(float)0.7);
+					TweenCard((Vector2)Card.Zone.Position(), new Vector2((float)0.7,(float)0.7));
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandMid) 
@@ -107,8 +153,7 @@ public class Drag : CardPanel
 						Zone = CardZone.Left,
 						SubZone = CardSubZone.Mid
 					};
-					RectPosition = (Vector2)Card.Zone.Position();
-					RectScale = new Vector2((float)0.7,(float)0.7);
+					TweenCard((Vector2)Card.Zone.Position(), new Vector2((float)0.7,(float)0.7));
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandBottomLeft) 
@@ -119,8 +164,7 @@ public class Drag : CardPanel
 						Zone = CardZone.Left,
 						SubZone = CardSubZone.BottomLeft
 					};
-					RectPosition = new Vector2(34, 917);
-					RectScale = new Vector2((float)0.7,(float)0.7);
+					TweenCard((Vector2)Card.Zone.Position(), new Vector2((float)0.7,(float)0.7));
 					_gm.Drop(Card, null);
 				} 
 				else if (_isOverLeftLandBottomRight) 
@@ -131,8 +175,7 @@ public class Drag : CardPanel
 						Zone = CardZone.Left,
 						SubZone = CardSubZone.BottomRight
 					};
-					RectPosition = new Vector2(188, 917);
-					RectScale = new Vector2((float)0.7,(float)0.7);
+					TweenCard((Vector2)Card.Zone.Position(), new Vector2((float)0.7,(float)0.7));
 					_gm.Drop(Card, null);
 				}
 				else if (_isOverMidLandTopLeft)
@@ -255,10 +298,10 @@ public class Drag : CardPanel
 				} 
 				else 
 				{
+					TweenCard(_start_position, new Vector2(1,1));
+
 					GD.Print("Move to Hand");
 					//TODO: make method
-					RectPosition = _startPosition;
-					RectScale = new Vector2(1,1);
 					Card.InPlay = false;
 					Card.Zone = new CardPlayedZone(){
 						Zone = CardZone.Hand
@@ -301,6 +344,15 @@ public class Drag : CardPanel
 				((Sprite)_gm.GetParent().GetNode<Sprite>("DropZone/DropZoneRight/Lands/LandBottomRight")).Position = new Vector2(230,230);
 				
 			}
+		}
+        base._Input(@event);
+    }
+
+    public override void _Process(float delta)
+	{
+		if (_isDragging)
+		{
+			_start_position = GetGlobalMousePosition();
 		}
 		base._Process(delta);
 	}
